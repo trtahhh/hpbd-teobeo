@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="petals-container" id="petals-container"></div>
+    
+    <!-- Khung 3D cho Thiệp -->
+    <div class="perspective-container">
+        <div class="book-card" id="birthday-card">
+            <!-- Tờ bìa (gồm mặt 1 và mặt 2) -->
+            <div class="card-page card-cover" id="cover">
+                <!-- Mặt 1: Bìa trước -->
+                <div class="page-face front">
+                    <h2>Gửi cục dàng</h2>
+                    <p class="click-hint">(Nhấp để mở)</p>
+                </div>
+                <!-- Mặt 2: Bìa trong (Mặt trái) -->
+                <div class="page-face back">
+                    <div class="heart-doodle">💖</div>
+                </div>
+            </div>
+
+            <!-- Tờ ruột (gồm mặt 3 và mặt 4) -->
+            <div class="card-page card-inside" id="inside">
+                <!-- Mặt 3: Nội dung chính & Hoa popup -->
+                <div class="page-face front">
+                    <div class="tulip-container">
+                        <!-- Tulip 2 -->
+                        <svg class="tulip tulip-2" viewBox="0 0 100 100">
+                            <path class="stem" d="M50 40 Q55 80 60 100" stroke="#8FCE00" stroke-width="3" fill="none"/>
+                            <path class="leaf" d="M52 70 Q30 60 40 40 Q50 50 52 70" fill="#8FCE00"/>
+                            <path class="leaf" d="M55 80 Q80 70 70 45 Q60 60 55 80" fill="#8FCE00"/>
+                            <path class="flower" d="M30 15 C30 35 40 45 50 45 C60 45 70 35 70 15 C60 25 50 5 40 25 C35 15 30 15 30 15 Z" fill="#FF9A9E"/>
+                        </svg>
+                        <!-- Tulip 1 (Center) -->
+                        <svg class="tulip tulip-1" viewBox="0 0 100 100">
+                            <path class="stem" d="M50 40 Q50 80 40 100" stroke="#8FCE00" stroke-width="3" fill="none"/>
+                            <path class="leaf" d="M48 70 Q70 60 60 40 Q50 50 48 70" fill="#8FCE00"/>
+                            <path class="leaf" d="M45 80 Q20 70 30 45 Q40 60 45 80" fill="#8FCE00"/>
+                            <path class="flower" d="M30 15 C30 35 40 45 50 45 C60 45 70 35 70 15 C60 25 50 5 40 25 C35 15 30 15 30 15 Z" fill="#FF6B81"/>
+                        </svg>
+                        <!-- Tulip 3 -->
+                        <svg class="tulip tulip-3" viewBox="0 0 100 100">
+                            <path class="stem" d="M50 40 Q45 80 50 100" stroke="#8FCE00" stroke-width="3" fill="none"/>
+                            <path class="leaf" d="M48 70 Q70 60 60 40 Q50 50 48 70" fill="#8FCE00"/>
+                            <path class="leaf" d="M45 80 Q20 70 30 45 Q40 60 45 80" fill="#8FCE00"/>
+                            <path class="flower" d="M30 15 C30 35 40 45 50 45 C60 45 70 35 70 15 C60 25 50 5 40 25 C35 15 30 15 30 15 Z" fill="#FEC8D8"/>
+                        </svg>
+                    </div>
+                    <h1>Chúc mừng sinh nhật!</h1>
+                    <p id="typewriter-text" class="typewriter-hidden">Chúc em bé của anh tuổi mới luôn xinh đẹp, rạng rỡ như những đóa hoa này và luôn hạnh phúc thật nhiều nhé! Yêu em ❤️</p>
+                    <div class="flip-hint" id="flip-hint">Mở tiếp nè <span class="red-thread"></span></div>
+                </div>
+                <!-- Mặt 4: Bìa sau (Nút lofi) -->
+                <div class="page-face back">
+                    <button class="music-toggle" id="music-toggle">
+                        <span class="music-icon">🎵</span> Bật/Tắt Nhạc
+                    </button>
+                    <p class="back-credit">Made with ❤️ for you</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nhạc nền (thêm file lofi.mp3 vào URL tạm) -->
+    <audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" loop></audio>
+    
+    <script src="script.js"></script>
+</body>
+</html>

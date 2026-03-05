@@ -1,0 +1,361 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #fff0f5 0%, #ffc0cb 100%);
+  min-height: 100vh;
+  font-family: "Quicksand", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.petals-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  background-color: #ffb6c1;
+  border-radius: 15px 0 15px 0;
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-20vh) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* --- Khung 3D --- */
+.perspective-container {
+  perspective: 1500px;
+  width: 100%;
+  max-width: 450px;
+  height: 600px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Cuốn sách/Thiệp chính --- */
+.book-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.card-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 5px 20px 20px 5px;
+}
+
+/* Các mặt của từng trang */
+.page-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 5px 20px 20px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.05);
+}
+
+/* --- Bìa ngoài (Cover) --- */
+.card-cover {
+  z-index: 5;
+}
+
+/* Mặt 1: Bìa trước */
+.card-cover .front {
+  background: white;
+  border: 4px solid #ffb6c1;
+  text-align: center;
+}
+
+.card-cover .front h2 {
+  font-family: "Dancing Script", cursive;
+  color: #ff4757;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.click-hint {
+  font-size: 1.2rem;
+  color: #ffb6c1;
+  animation: pulse 1.5s infinite;
+}
+
+/* Mặt 2: Bìa trong (Trái) */
+.card-cover .back {
+  background: #fff0f5;
+  transform: rotateY(180deg);
+  border: 2px dashed #ffb6c1;
+}
+
+.heart-doodle {
+  font-size: 4rem;
+  opacity: 0.3;
+}
+
+/* --- Ruột thiệp (Inside) --- */
+.card-inside {
+  z-index: 4;
+}
+
+/* Mặt 3: Nội dung chính (Phải) */
+.card-inside .front {
+  background: white;
+  border: 4px solid #ffe4e1;
+  box-shadow: 10px 10px 30px rgba(255, 107, 129, 0.15);
+}
+
+.card-inside .front h1 {
+  font-family: "Dancing Script", cursive;
+  color: #ff4757;
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.card-inside .front p {
+  color: #57606f;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 600;
+  text-align: center;
+  min-height: 100px;
+}
+
+/* Mặt 4: Bìa sau cùng */
+.card-inside .back {
+  background: #ffc0cb;
+  transform: rotateY(180deg);
+}
+
+.music-toggle {
+  background: white;
+  border: 2px solid #ff4757;
+  color: #ff4757;
+  border-radius: 30px;
+  padding: 10px 25px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 5px 15px rgba(255, 71, 87, 0.2);
+}
+
+.music-toggle:hover {
+  background: #ff4757;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.back-credit {
+  position: absolute;
+  bottom: 20px;
+  color: white;
+  font-size: 0.9rem;
+  font-family: "Quicksand", sans-serif;
+}
+
+/* --- Hiệu ứng mở thiệp --- */
+.book-card.open {
+  transform: translateX(50%); /* Dời sang phải để mép trái thiệp xoay lại nằm ngay giữa */
+}
+
+.book-card.open .card-cover {
+  transform: rotateY(-180deg);
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+}
+
+.book-card.open .card-inside .front h1 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1.2s; /* Chờ lật bìa xong mới hiện nội dung */
+}
+
+/* --- Hiệu ứng lật trang 2 (Xem mặt 4) --- */
+.book-card.show-back {
+  transform: translateX(100%); /* Giữ cân giữa khi cả 2 trang lật qua trái */
+}
+
+.book-card.show-back .card-inside {
+  transform: rotateY(-180deg);
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+  z-index: 6; /* Bắt buộc đè lên Mặt 2 (card-cover z-index 5) để không bị che khuất và chặn click */
+}
+
+.flip-hint {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  font-family: "Quicksand", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ff4757;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.5s ease 1s; /* Chờ mở xong mới hiện */
+}
+
+.book-card.open .flip-hint {
+  opacity: 1;
+}
+
+.book-card.show-back .flip-hint {
+  opacity: 0; /* Ẩn đi khi đã lật */
+}
+
+.red-thread {
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background-color: #ff4757;
+  position: relative;
+}
+
+.red-thread::after {
+  content: "→";
+  color: #ff4757;
+  position: absolute;
+  right: -5px;
+  top: -10px;
+  font-size: 1.2rem;
+}
+
+/* --- Typewriter Helper Classes --- */
+.typewriter-hidden {
+    visibility: hidden;
+}
+
+.typewriter-cursor::after {
+    content: "|";
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* --- Hoa Popup --- */
+.tulip-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 130px;
+  margin-bottom: 15px;
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.book-card.open .tulip-container {
+  transform: scale(1);
+  transition-delay: 1s; /* Đợi mở thiệp xong mới pop-up hoa */
+}
+
+.tulip {
+  transform-origin: bottom center;
+  animation: sway 4s ease-in-out infinite alternate;
+}
+
+.tulip-1 { width: 75px; height: 120px; z-index: 2; margin: 0 -15px; }
+.tulip-2 { width: 65px; height: 100px; margin-bottom: 5px; z-index: 1; animation-delay: -1s; }
+.tulip-3 { width: 65px; height: 105px; margin-bottom: -5px; z-index: 1; animation-delay: -2s; }
+
+@keyframes sway {
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@media (max-width: 768px) {
+  .book-card.open {
+    transform: translateX(50%) scale(0.75); /* Zoom nhỏ thiệp 2 mặt lại để vừa màn hình ngang */
+  }
+  .book-card.show-back {
+    transform: translateX(100%) scale(0.75);
+  }
+}
+
+@media (max-width: 480px) {
+  .perspective-container {
+      max-width: 250px;
+      height: 380px;
+  }
+  .card-cover .front h2 {
+      font-size: 2.2rem;
+  }
+  .book-card.open {
+    transform: translateX(50%) scale(0.65); /* Thu nhỏ nữa cho dế yêu */
+  }
+  .book-card.show-back {
+    transform: translateX(100%) scale(0.65);
+  }
+}
+
+/* Emoji Drop Styles */
+.emoji-drop {
+  position: absolute;
+  font-size: 24px;
+  user-select: none;
+  pointer-events: none;
+  animation: fall linear infinite;
+  z-index: 1;
+}
